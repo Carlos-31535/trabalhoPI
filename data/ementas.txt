@@ -1,0 +1,5 @@
+2feira;18.12.2024;Sopa de legumes, pescada cozida;180;Sopa de legumes, estufado de vitela;330;Sopa de legumes, salada mista;150;Sopa de legumes, feijão preto;200
+3feira;19.12.2024;Creme de cenoura, salmão grelhado;250;Creme de cenoura, frango assado;340;Creme de cenoura, omelete de claras;200;Creme de cenoura, tofu grelhado;190
+4feira;20.12.2024;Caldo verde, bacalhau à Brás;240;Caldo verde, costeletas de porco;360;Caldo verde, arroz integral com legumes;210;Caldo verde, bolinhos de lentilhas;180
+5feira;21.12.2024;Sopa de abóbora, dourada grelhada;200;Sopa de abóbora, bifes de peru;320;Sopa de abóbora, tabule de quinoa;170;Sopa de abóbora, hambúrguer de grão;190
+6feira;22.12.2024;Sopa de espinafres, sardinhas assadas;260;Sopa de espinafres, carne assada;400;Sopa de espinafres, wrap de frango;220;Sopa de espinafres, cogumelos recheados;210
