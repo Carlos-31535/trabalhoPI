@@ -11,7 +11,6 @@ char nomesficheiros[3][75] = {
     "../../data/escolhas.txt" };
 
 
-
 FILE* fileFuncionario; /**< Variável usada para guardar dados lidos no ficheiro referente a pacientes. */
 FILE* fileEmentas; /**< Variável usada para guardar dados lidos no ficheiro referente a dietas. */
 FILE* fileEscolhas; /**< Variável usada para guardar dados lidos no ficheiro referente a planos nutricionais. */
@@ -180,6 +179,7 @@ int carregarEscolhas(const char *caminhoEscolha, Escolha escolhas[], int maxEsco
 int main() {
 
     leituraFicheiros(0);
+     menuInicial(1, funcionario, ementas, escolhas);
 
     // int totalFuncionarios = carregarFuncionarios("data/funcionarios.csv", funcionarios, MAX_FUNCIONARIOS);
     // printf("Funcionarios carregados: %d\n", totalFuncionarios);
