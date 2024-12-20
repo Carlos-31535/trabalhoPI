@@ -11,9 +11,9 @@ char nomesficheiros[3][75] = {
     "../../data/escolhas.txt" };
 
 
-FILE* fileFuncionario; /**< Variável usada para guardar dados lidos no ficheiro referente a pacientes. */
-FILE* fileEmentas; /**< Variável usada para guardar dados lidos no ficheiro referente a dietas. */
-FILE* fileEscolhas; /**< Variável usada para guardar dados lidos no ficheiro referente a planos nutricionais. */
+FILE* fileFuncionario; /**< Variável usada para guardar dados lidos no ficheiro referente a Funcionarios. */
+FILE* fileEmentas; /**< Variável usada para guardar dados lidos no ficheiro referente a Ementas. */
+FILE* fileEscolhas; /**< Variável usada para guardar dados lidos no ficheiro referente a planos Escolhas. */
 
 Funcionario* funcionario;
 Ementa* ementas;
@@ -21,9 +21,9 @@ Escolha* escolhas;
 
 int leituraFicheiros(int tab)
 {
-    char formatoStringFuncionario[50]; /**< Variável usada para guardar a forma de como o programa vai ler a separação de dados de pacientes. */
-    char formatoStringEmentas[50];   /**< Variável usada para guardar a forma de como o programa vai ler a separação de dados de dietas. */
-    char formatoStringEscolhas[50];  /**< Variável usada para guardar a forma de como o programa vai ler a separação de dados de planos nutricionais.*/
+    char formatoStringFuncionario[50]; /**< Variável usada para guardar a forma de como o programa vai ler a separação de dados de Funcionarios. */
+    char formatoStringEmentas[50];   /**< Variável usada para guardar a forma de como o programa vai ler a separação de dados de Ementas. */
+    char formatoStringEscolhas[50];  /**< Variável usada para guardar a forma de como o programa vai ler a separação de dados de planos Escolhas.*/
 
     //Se for para ler com -tab, charSeparador = \t, se não for, separa por ';'
     if (tab == 1) {
@@ -60,18 +60,18 @@ int i;
    scanf("%d",&i);
    
     //Lê o conteúdo dos ficheiros
-    while (fscanf(fileFuncionario, formatoStringFuncionario, &funcionario[numFuncionario].numero_funcionario, funcionario[numFuncionario].nome,funcionario[numFuncionario].nif, funcionario[numFuncionario].tlm) == 3) {
+    while (fscanf(fileFuncionario, formatoStringFuncionario, &funcionario[numFuncionario].nrfuncionario, funcionario[numFuncionario].nome,funcionario[numFuncionario].nif, funcionario[numFuncionario].tlm) == 3) {
         numFuncionario++;
     }
 
     printf("%d",numFuncionario);
         scanf("%d",&i);
 
-    // while (fscanf(fileEmentas, formatoStringDietas, &dietas[numEmentas].id, dietas[numEmentas].data, dietas[numEmentas].refeicao, dietas[numEmentas].alimento, &dietas[numEmentas].calorias) == 5) {
+    // while (fscanf(fileEmentas, formatoStringEmentas, &ementas[numEmentas].id, ementas[numEmentas].data, ementas[numEmentas].refeicao, ementas[numEmentas].alimento, &ementas[numEmentas].calorias) == 5) {
     //     numEmentas++;
     // }
 
-    // while (fscanf(fileEscolhas, formatoStringPlanos, &planoNutricional[numEscolhas].id, planoNutricional[numEscolhas].data, planoNutricional[numEscolhas].refeicao, &planoNutricional[numEscolhas].calorias_min, &planoNutricional[numEscolhas].calorias_max) == 5) {
+    // while (fscanf(fileEscolhas, formatoStringEscolhas, &escolhas[numEscolhas].id, escolhas[numEscolhas].data, escolhas[numEscolhas].refeicao, &escolhas[numEscolhas].calorias_min, &escolhas[numEscolhas].calorias_max) == 5) {
     //     numEscolhas++;
     // }
 
@@ -89,7 +89,7 @@ int i;
 // Funcoes para processar linhas
 void processaLinhaFuncionario(char *linha, Funcionario *funcionario) {
     const char delimitador[] = ";";
-    funcionario->numero_funcionario = atoi(strtok(linha, delimitador));
+    funcionario->nrfuncionario = atoi(strtok(linha, delimitador));
     strcpy(funcionario->nome, strtok(NULL, delimitador));
     funcionario->nif = atoi(strtok(NULL, delimitador));
     funcionario->tlm = atoi(strtok(NULL, delimitador));
@@ -116,7 +116,7 @@ void processaLinhaEmenta(char *linha, Ementa *ementa) {
 void processaLinhaEscolha(char *linha, Escolha *escolha) {
     const char delimitador[] = ";";
     strcpy(escolha->dia_semana, strtok(linha, delimitador));
-    escolha->numero_funcionario = atoi(strtok(NULL, delimitador));
+    escolha->nrfuncionario = atoi(strtok(NULL, delimitador));
     escolha->tipo_prato = strtok(NULL, delimitador)[0];
 }
 
@@ -179,16 +179,17 @@ int carregarEscolhas(const char *caminhoEscolha, Escolha escolhas[], int maxEsco
 int main() {
 
     leituraFicheiros(0);
-     menuInicial(1, funcionario, ementas, escolhas);
+    
+    int totalFuncionarios = carregarFuncionarios("data/funcionarios.txt", funcionario, MAX_FUNCIONARIOS);
+    printf("Funcionarios carregados: %d\n", totalFuncionarios);
 
-    // int totalFuncionarios = carregarFuncionarios("data/funcionarios.csv", funcionarios, MAX_FUNCIONARIOS);
-    // printf("Funcionarios carregados: %d\n", totalFuncionarios);
+    int totalEmentas = carregarEmenta("data/ementa.txt", ementas, MAX_EMENTAS);
+    printf("Ementas carregadas: %d\n", totalEmentas);
 
-    // int totalEmentas = carregarEmenta("data/ementa.csv", ementas, MAX_EMENTAS);
-    // printf("Ementas carregadas: %d\n", totalEmentas);
-
-    // int totalEscolhas = carregarEscolhas("data/escolhas.csv", escolhas, MAX_ESCOLHAS);
+    // int totalEscolhas = carregarEscolhas("data/escolhas.txt", escolhas, MAX_ESCOLHAS);
     // printf("Escolhas carregadas: %d\n", totalEscolhas);
+    
+    //menuInicial(1, funcionario, ementas, escolhas);
 
     return 0;
 }
